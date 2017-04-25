@@ -1,20 +1,38 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule }        from '@angular/platform-browser';
+import { NgModule }             from '@angular/core';
+import { FormsModule }          from '@angular/forms';
+import { HttpModule }           from '@angular/http';
+import { RouterModule, Routes } from '@angular/router'
+import { ModalModule }          from 'ng2-bootstrap/modal';
 
-import { AppComponent } from './app.component';
+import { UsersService } from './services/user.service';
+
+import { AppComponent }       from './app.component';
+import { UsersListComponent } from './users-list/users-list.component';
+// import { UserFormComponent } from './user-form/user-form.component';
+// import { UserModalComponent } from './user-modal/user-modal.component';
+
+const routes: Routes = [
+  {path: '', redirectTo: 'users', pathMatch: 'full'},
+  {path: 'users', component: UsersListComponent },
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UsersListComponent,
+    //
+    // UserFormComponent,
+    // UserModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(routes),
+    ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
